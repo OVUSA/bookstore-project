@@ -89,13 +89,15 @@ payload/body:
 ```
 POST MEDTHOD Response .........<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Product><productId>XY1756</productId><title>Mocking Jay Part 3</title><price>100.0</price><description>Sequel of the part 2</description><author>Alvin Chip</author></Product>
 
-````````````````
+
 Delete a product:
+
 ```
 @DELETE
 /productservice/product/{productId}
 ```
 DELETE MEDTHOD Response ......... OK
+
 
 # Partner
 

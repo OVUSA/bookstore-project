@@ -53,6 +53,47 @@ Delete customer:
         <lastName>Smith</lastName>
 </Customer>
 ```
+# Product
+
+The Product endpoint has the following URIs and corresponding methods:
+
+Get product by ID:
+
+```
+@GET
+/productservice/product/{productId} 
+```
+GET METHOD Response: ....{"Product":{"productId":"XY1111","title":"Mocking Jay","price":2350,"description":"Book on Mocking Jay","author":"John Smith"}}
+
+````````
+Get all products:
+
+```
+@GET
+productservice/product
+```
+GET All METHOD Response: ....{"Product":[{"productId":"XY1111","title":"Mocking Jay","price":2350,"description":"Book on Mocking Jay","author":"John Smith"},{"productId":"XY1756","title":"Mocking Jay Part 3","price":100,"description":"Sequel of the part 2","author":"Alvin Chip"},{"productId":"XY1112","title":"Mocking Jay Part 2","price":2353,"description":"Series book on Mocking Jay","author":"John Smith"}]}
+
+`````````
+
+Add a product:
+```
+@POST
+/productservice/product
+
+payload/body: 
+<Product><productId>XY1756</productId><title>Mocking Jay Part 3</title><price>100.0</price><description>Sequel of the part 2</description><author>Alvin Chip</author></Product>
+
+```
+POST MEDTHOD Response .........<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Product><productId>XY1756</productId><title>Mocking Jay Part 3</title><price>100.0</price><description>Sequel of the part 2</description><author>Alvin Chip</author></Product>
+
+````````````````
+Delete a partner:
+```
+@DELETE
+/productservice/product/{productId}
+```
+DELETE MEDTHOD Response ......... OK
 
 # Partner
 

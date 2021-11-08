@@ -3,12 +3,16 @@ package com.ebook.dal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Repository;
 
 import com.ebook.model.item.Product;
 import com.ebook.model.order.Order;
 import com.ebook.model.order.OrderDetail;
 import com.ebook.model.order.Payment;
 
+@Repository
 public class OrderDAO {
 	
 	private static HashMap <String, Order> orders = new HashMap <String, Order>();
@@ -24,10 +28,16 @@ public class OrderDAO {
 		
 	}
 	
-	public void createOrder(Order order) {
+	public List<Order> getAllOrders() {
+		List<Order> orderList = new ArrayList<Order>(orders.values());
+
+		return orderList;
+		
+	}
+	public Order createOrder(Order order) {
 		
 		Order newOrder = new Order();
-		newOrder.setOrderId(order.getOrderId());
+		newOrder.setOrderId(UUID.randomUUID().toString());
 		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 		
 //		orderDetails = order.getOrderDetails();
@@ -65,13 +75,16 @@ public class OrderDAO {
 		
 		orders.put(newOrder.getOrderId(), newOrder);
 		
+		return newOrder;
+		
 	}
 	
 	
 	
-	public void updateOrderstatus(String orderId, String Status) {
+	public Order updateOrderstatus(String orderId, String Status) {
 		
 		orders.get(orderId).setOrderState(Status);
+		return orders.get(orderId);
 	}
 
 }

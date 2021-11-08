@@ -1,17 +1,21 @@
 package com.ebook.model.order;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.ebook.model.item.Product;
 
-public class Order {
+
+@XmlRootElement
+public class Order implements Serializable {
 	private String orderId;
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	private boolean paymentReceived;
 	private String orderState = "Open";
 	private Payment payment;
-	
-	
 	
 	public Order() {}
 	

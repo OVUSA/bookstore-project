@@ -12,7 +12,7 @@ import com.ebook.model.customer.Customer;
 import com.ebook.model.item.Book;
 import com.ebook.model.order.Order;
 import com.ebook.model.order.Payment;
-import com.ebook.model.service.customer.representation.CustomerRequest;
+import com.ebook.service.customer.representation.CustomerRequest;
 
 public class CustomerDAO {
 	

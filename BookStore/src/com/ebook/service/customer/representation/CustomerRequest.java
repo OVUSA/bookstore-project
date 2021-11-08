@@ -1,26 +1,28 @@
-package com.ebook.model.customer;
+package com.ebook.service.customer.representation;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
+import com.ebook.model.customer.Address;
 import com.ebook.model.order.Order;
 
 @XmlRootElement
-public class Customer implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "")
+public class CustomerRequest {
+
 	private String customerId;
 	private String lastName;
-	private String firstName;	
+	private String firstName;
 	private Address billingAddress;
 	private Address shippingAddress;
 	private List<Order> orders = new ArrayList<Order>();	
-
-	public Customer() {}
-
+	
 	public String getcustomerId() {
 		return customerId;
 	}
@@ -72,4 +74,5 @@ public class Customer implements Serializable{
 	public void addOrder(Order order) {
 		orders.add(order);
 	}
+
 }

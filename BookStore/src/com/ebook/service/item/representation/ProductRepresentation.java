@@ -1,20 +1,22 @@
-package com.ebook.model.item;
+package com.ebook.service.item.representation;
 
-import java.io.Serializable;
-//import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement
-public class Product implements Serializable{
-	private static final long serialVersionUID = 1L;
+@XmlRootElement(name = "Product")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "")
+public class ProductRepresentation {
+	
 	private String productId;
 	private String title;
 	private double price;
 	private String description;
 	private String author;
-	
-	public Product() {}
+
+	public ProductRepresentation() {}
 	
 	public String getproductId() {
 		return productId;
@@ -55,4 +57,7 @@ public class Product implements Serializable{
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+		
+		
 }
+

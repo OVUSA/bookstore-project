@@ -1,110 +1,155 @@
 package com.ebook.dal;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import com.ebook.model.customer.Address;
 import com.ebook.model.customer.Customer;
+import com.ebook.model.item.Book;
+import com.ebook.model.order.Order;
+import com.ebook.model.order.Payment;
+import com.ebook.model.service.customer.representation.CustomerRequest;
 
 public class CustomerDAO {
-	public CustomerDAO() {}
 	
-	public Customer getCustomer(String customerId) {
-		 	 
-	    try { 		
-	    	//Get Customer
-	    	Statement st = DBHelper.getConnection().createStatement();
-	    	String selectCustomerQuery = "SELECT customerID, lname, fname FROM Customer WHERE customerID = '" + customerId + "'";
+	private static Set<Customer> customers = new HashSet<Customer>();
 
-	    	ResultSet custRS = st.executeQuery(selectCustomerQuery);      
-	    	System.out.println("CustomerDAO: *************** Query " + selectCustomerQuery);
-	    	
-	      //Get Customer
-    	  Customer customer = new Customer();
-	      while ( custRS.next() ) {
-	    	  customer.setCustomerId(custRS.getString("customerID"));
-	    	  customer.setLastName(custRS.getString("lname"));
-	    	  customer.setFirstName(custRS.getString("fname"));
-	      }
-	      //close to manage resources
-	      custRS.close();
-	      	    		  
-	      //Get Address
-	      String selectAddressQuery = "SELECT addressID, street, unit, city, state, zip FROM Address WHERE customerID = '" + customerId + "'";
-	      ResultSet addRS = st.executeQuery(selectAddressQuery);
-    	  Address address = new Address();
-    	  
-    	  System.out.println("CustomerDAO: *************** Query " + selectAddressQuery);
-    	  
-	      while ( addRS.next() ) {
-	    	  address.setAddressId(addRS.getString("addressid"));
-	    	  address.setStreet(addRS.getString("street"));
-	    	  address.setUnit(addRS.getString("unit"));
-	    	  address.setCity(addRS.getString("city"));
-	    	  address.setState(addRS.getString("state"));
-	    	  address.setZip(addRS.getString("zip"));
-	      }
-	      
-	      customer.setBillingAddress(address);
-	      //close to manage resources
-	      addRS.close();
-	      st.close();
-	      
-	      return customer;
-	    }	    
-	    catch (SQLException se) {
-	      System.err.println("CustomerDAO: Threw a SQLException retrieving the customer object.");
-	      System.err.println(se.getMessage());
-	      se.printStackTrace();
-	    }
-	    
-	    return null;
-	  }
+	public CustomerDAO() {
+		Customer customer = new Customer();
+		
+		Address billingAddress = new Address();
+        billingAddress.setStreet("500 West Madison St.");
+        billingAddress.setUnit("Suite 1000");
+        billingAddress.setCity("Chicago");
+        billingAddress.setState("IL");
+        billingAddress.setZip("66610");
+        
+        Address shippingAddress = new Address();
+    	shippingAddress.setStreet("500 West Madison St.");
+    	shippingAddress.setUnit("Suite 1000");
+    	shippingAddress.setCity("Chicago");
+    	shippingAddress.setState("IL");
+    	shippingAddress.setZip("66610");
+    	
+    	// build orders info
+    	List<Order> orders = new ArrayList<Order> (); 
+    	
+    	Order order1 = new Order();
+        order1.setOrderId("BO-66734");        
+        //First product
+        Book product1 = new Book();
+        product1.setproductId("BF-7898");
+        product1.setISBN("234-89675-27690");
+        product1.setTitle("Patterns of Enterprise Application Architecture");
+        product1.setAuthor("Folwer, Martin");
+        product1.setPrice(50.99);        
+        order1.addProduct(product1, 1);        
+        //Second product
+        Book product2 = new Book();
+        product2.setproductId("BF-2345");
+        product2.setISBN("892-12345-93667");
+        product2.setTitle("Web Application Architecture");
+        product2.setAuthor("Shklar, Leon");
+        product2.setPrice(45.99);
+        order1.addProduct(product2, 1);
+        //Third product
+        Book product3 = new Book();
+        product3.setproductId("BF-234212");
+        product3.setISBN("892-123445-93667");
+        product3.setTitle("testingar Architecture");
+        product3.setAuthor("gmg, dogecoin");
+        product3.setPrice(155.99);
+        order1.addProduct(product3, 1);
+        
+        //finish order	        
+        order1.confirmOrder();
+        
+        // build payment info
+        Payment payment = new Payment();
+        payment.setPaymentId(new Long("1234"));
+        payment.setPaymentStatus("Paid");
+        payment.setPaymentType("CreditCard");
+        payment.setSubTotal(order1.getOrderTotal());        
+        order1.setPayment(payment);
+        
+        order1.orderPayed();
+        orders.add(order1);	    
+        
+		customer.setcustomerId("XY1111");
+		customer.setfirstName("John");
+		customer.setlastName("Smith");
+		customer.setbillingAddress(billingAddress);
+		customer.setshippingAddress(shippingAddress);
+		customer.setOrders(orders);
 	
-	public void addCustomer(Customer cust) {
-		Connection con = DBHelper.getConnection();
-        PreparedStatement custPst = null;
-        PreparedStatement addPst = null;
-
-        try {
-        	//Insert the customer object
-            String custStm = "INSERT INTO Customer(customerID, lname, fname) VALUES(?, ?, ?)";
-            custPst = con.prepareStatement(custStm);
-            custPst.setString(1, cust.getCustomerId());
-            custPst.setString(2, cust.getLastName());       
-            custPst.setString(3, cust.getFirstName()); 
-            custPst.executeUpdate();
-
-        	//Insert the customer address object
-            String addStm = "INSERT INTO Address(customerID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
-            addPst = con.prepareStatement(addStm);
-            addPst.setString(1, cust.getCustomerId());
-            addPst.setString(2, cust.getBillingAddress().getAddressId());  
-            addPst.setString(3, cust.getBillingAddress().getStreet());       
-            addPst.setString(4, cust.getBillingAddress().getUnit());  
-            addPst.setString(5, cust.getBillingAddress().getCity());  
-            addPst.setString(6, cust.getBillingAddress().getState());      
-            addPst.setString(7, cust.getBillingAddress().getZip());  
-            addPst.executeUpdate();
-        } catch (SQLException ex) {
-
-        } finally {
-
-            try {
-                if (addPst != null) {
-                	addPst.close();
-                	custPst.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-
-            } catch (SQLException ex) {
-      	      System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
-    	      System.err.println(ex.getMessage());
-            }
+		customers.add(customer);
+	}
+	
+	public Set<Customer> getAllCustomers(){
+		return customers;
+	}
+	
+	public Customer getCustomerById(String customerId) {
+		Iterator<Customer> it = customers.iterator();
+		while(it.hasNext()) {
+          Customer cust = (Customer)it.next();
+          if (cust.getcustomerId().equals(customerId)) {
+        	  return cust;
+          }
         }
-    }
+		return null;
+	}
+
+	public Customer addCustomer(CustomerRequest customerRequest){
+		Customer customer = new Customer();
+		
+		Random randomGenerator = new Random();
+	    int randomInt = randomGenerator.nextInt(10000);
+	    long randomLong = randomGenerator.nextLong();
+	    String customerId = "XY" + randomInt;
+	    
+		customer.setcustomerId(customerId);
+		customer.setfirstName(customerRequest.getfirstName());
+		customer.setlastName(customerRequest.getlastName());
+		customer.setbillingAddress(customerRequest.getbillingAddress());
+		customer.setshippingAddress(customerRequest.getshippingAddress());
+		customer.setOrders(customerRequest.getOrders());
+	
+		customers.add(customer);
+		
+		return customer;
+	}
+	
+	public void updateCustomer(CustomerRequest customerRequest) {
+		Iterator<Customer> it = customers.iterator();
+		while(it.hasNext()) {
+          Customer cust = (Customer)it.next();
+          if (cust.getcustomerId().equals(customerRequest.getcustomerId())) {
+        	  cust.setfirstName(customerRequest.getfirstName());
+        	  cust.setlastName(customerRequest.getlastName());
+        	  cust.setbillingAddress(customerRequest.getbillingAddress());
+        	  cust.setshippingAddress(customerRequest.getshippingAddress());
+        	  cust.setOrders(customerRequest.getOrders());
+        	  
+        	  return;
+          }
+        }
+	}
+	
+	public void deleteCustomer(String customerId) {
+		Iterator<Customer> it = customers.iterator();
+		while(it.hasNext()) {
+          Customer cust = (Customer)it.next();
+          if (cust.getcustomerId().equals(customerId)) {
+        	  customers.remove(cust);
+        	  return;
+          }
+        }
+	}
+	
+
 }

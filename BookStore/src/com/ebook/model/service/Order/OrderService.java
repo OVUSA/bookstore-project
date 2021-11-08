@@ -1,18 +1,23 @@
-package com.ebook.model.service.Partner;
+package com.ebook.service;
 
-import java.util.Set;
+
+import java.util.List;
 
 import javax.jws.WebService;
 
-import com.ebook.model.partner.Partner;
-import com.ebook.model.service.Partner.representation.PartnerRepresentation;
+import com.ebook.service.representation.OrderRepresentation;
+import com.ebook.service.representation.OrderRequest;
+import com.ebook.service.representation.OrderUpdateRequest;
 
 @WebService
-public interface PartnerService {
-	   
-	public Set<PartnerRepresentation> getPartners();
-	public PartnerRepresentation getPartner(int Id);
-//	public Partner_Representation createPartner(Partner partner); FIX ME
-	System.out.println("000---------------------Orderservice---------------")
 
+public interface OrderService {
+
+    OrderRepresentation updateOrder(OrderUpdateRequest orderUpdateReq);
+    OrderRepresentation getOrder(String orderId);
+    OrderRepresentation createOrder(OrderRequest orderRequest);
+    List<OrderRepresentation> getAllOrders();
+
+    //public Response updateEmployee(EmployeeRequest employeeRequest);
+    //public Response deleteEmployee(String employeeId);
 }

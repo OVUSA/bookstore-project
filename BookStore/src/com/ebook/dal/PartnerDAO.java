@@ -22,7 +22,6 @@ public class PartnerDAO {
 	  Random randomGenerator = new Random();
 	  int randomInt = randomGenerator.nextInt(10000);
 	  String id = "PI" + randomInt;
-	  
 	  partner.setpartnerId(id);
 	 
 	  partners.put(id,partner);

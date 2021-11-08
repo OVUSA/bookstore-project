@@ -31,13 +31,16 @@ public class PartnerInventoryDAO implements Inventory{
 		Integer k = partnerInventory.get(product);
 		partnerInventory.put(product,k-amount);
 	}
-	
+
 
 	@Override
-	public void reviewAllProducts() {	
-		for (Map.Entry<Product,Integer> list: partnerInventory.entrySet()) {		
-			System.out.println(list.getKey() +":"+ list.getValue());
+	public List<Product> reviewAllProducts() {
+		List<Product>partnerInv = new ArrayList<>();
+
+		for (Product partProdu:partnerInventory.keySet()) {
+			partnerInv.add(partProdu);
 		}
+		return partnerInv;
 	}
 	
 	@Override

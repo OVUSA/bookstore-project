@@ -45,13 +45,14 @@ public class PartnerInventoryManager implements Inventory{
 	}
 
 	@Override
-	public void reviewAllProducts() {
+	public List<Product> reviewAllProducts() {
 		try {
-			inventory1.reviewAllProducts();
+			return inventory1.reviewAllProducts();
 		}catch(Exception ex) {
 			System.out.println("Partner inventory service: Threw an error reviwing all partner's products");
 		}
-		
+		return null;
+
 	}
 
 }

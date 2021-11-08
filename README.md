@@ -99,6 +99,65 @@ Delete a partner:
     <partnerInfo>Children books</partnerInfo>
 </Partner>
 ```
+# Order
+The order endpoint has the following URIs and corresponding methods:
+
+Create Order by ID:
+```
+@POST
+/orderservice/order
+```
+Json Postman body
+
+```
+{"orderRequest":{
+    	
+    	"orderDetails":[{
+    		"quantity":1,
+    		"product" :{
+    			"id":2112233,
+    			"title":"2NewTitle",
+    			 "price":290.00,
+    			 "description": "2-Testing the input"
+    		}
+    	}], 
+	"paymentReceived": true,
+	"orderState": "Open",
+	"payment":{
+		"paymentId": 247,
+		"paymentStatus": "Completed",
+		"subTotal": 290.00,
+		"paymentType": "Cash"
+} 			
+    }
+}
+```
+
+To update orders
+```
+@POST
+/orderservice/order/update
+```
+Json Postman body
+```
+{"orderUpdateRequest":
+{ "orderId": "d6ae44d9-9826-4b95-9a58-10576097affa",
+    "status": "Pending"
+}
+}
+```
+
+Get All orders:
+```
+@GET
+/orderservice/orders
+```
+Get Order by ID:
+
+```
+@Get
+/orderservice/order/{order-id}
+```
 
 
 

@@ -1,14 +1,17 @@
 package com.ebook.model.item;
 
+import java.util.Set;
+
+import com.ebook.service.item.representation.ProductRequest;
+
 public interface IProductManager {
 	
-	public void Add(Object object);
+	public Set<Product> getAllProducts();
 	
-	public void Update(Object object);
+	public Product getProductById(String productId);
+
+	public Product AddProduct(ProductRequest productrequest);
 	
-	public void remove(Object object);
-	
-	public void getAll();
-	
-	public void getById(Object objectid);
+	public void UpdateProduct(ProductRequest productrequest);
+
 }

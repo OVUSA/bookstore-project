@@ -1,31 +1,27 @@
 package com.ebook.model.item;
 
-import java.util.List;
+import java.io.Serializable;
+//import java.util.List;
 
-public class Product {
-	private String id;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Product implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private String productId;
 	private String title;
 	private double price;
 	private String description;
-	private List<Review> review;
+	private String author;
 	
 	public Product() {}
 	
-	public Product(String id, String title, double price, String description, List<Review> review) {
-		this.id=id;
-		this.title=title;
-		this.price=price;
-		this.description=description;
-		this.review=review;
-	}
-	
-	
-	public String getId() {
-		return id;
+	public String getproductId() {
+		return productId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setproductId(String productId) {
+		this.productId = productId;
 	}
 	
 	public String getTitle() {
@@ -52,11 +48,11 @@ public class Product {
 		this.description = description;
 	}
 	
-	public List<Review> getReview() {
-		return review;
+	public String getAuthor() {
+		return author;
 	}
 	
-	public void setReview(List<Review> review) {
-		this.review = review;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 }

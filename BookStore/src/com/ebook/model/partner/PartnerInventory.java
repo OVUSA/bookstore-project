@@ -8,6 +8,11 @@ public class PartnerInventory {
 	private int quantity;
 	private PartnerInventoryDAO inventoryDAO;
 	
+	PartnerInventory(Product product, int quantity){
+		this.product = product;
+		this.quantity = quantity;
+	}
+	
 	PartnerInventory(){
 		this.inventoryDAO = new PartnerInventoryDAO();
 		
@@ -34,13 +39,6 @@ public class PartnerInventory {
 
 	public void setInventoryDAO(PartnerInventoryDAO inventoryDAO) {
 		this.inventoryDAO = inventoryDAO;
-	}
-
-	
-	
-	PartnerInventory(Product product, int quantity){
-		this.product = product;
-		this.quantity = quantity;
 	}
 
 }

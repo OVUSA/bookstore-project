@@ -1,4 +1,4 @@
-package com.ebook.model.service.Partner.workflow;
+package com.ebook.service.Partner.workflow;
 
 import java.util.HashSet;
 
@@ -6,7 +6,7 @@ import java.util.Set;
 
 import com.ebook.model.partner.Partner;
 import com.ebook.model.partner.PartnerManager;
-import com.ebook.model.service.Partner.representation.PartnerRepresentation;
+import com.ebook.service.Partner.representation.PartnerRepresentation;
 
 
 public class PartnerActivity {
@@ -33,6 +33,8 @@ public class PartnerActivity {
 		
 		PartnerRepresentation partRep = new PartnerRepresentation();
 		partRep.setPartnerName(partner.getPartnerName());
+		partRep.setPartnerInfo(partner.getPartnerInfo());
+		partRep.setPartnerID(partner.getpartnerId());
 		
 		return partRep;
 	}
@@ -54,5 +56,4 @@ public class PartnerActivity {
 		partnerManager.removePartner(id);
 		return "Partner is deleted";
 	}
-	
 }

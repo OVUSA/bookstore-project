@@ -3,58 +3,76 @@ package com.ebook.model.partner;
 import java.util.List;
 
 import com.ebook.dal.PartnerInventoryDAO;
+import com.ebook.dal.ProductDAO;
 import com.ebook.model.item.Product;
+import com.ebook.model.item.ProductManager;
+import com.ebook.service.item.representation.ProductRequest;
 
-public class PartnerInventoryManager implements Inventory{
-	private PartnerInventoryDAO inventory1= new PartnerInventoryDAO();
+public class PartnerInventoryManager implements Inventory {
+	private static PartnerInventoryDAO inventory1= new PartnerInventoryDAO();
+	ProductManager productManager = new ProductManager();
+	
 
-	@Override
-	public void addProduct(Product product, int quantity) {
-		try{
-            inventory1.addProduct(product,quantity);
-        }catch (Exception ex){
-            System.out.println("Partner inventory service:Threw an error adding a "+product+".");
-        }
+	public void addPartnerProduct(String title,String description,int price, String author, int quantity) {
+			
+			ProductRequest productRequest = new ProductRequest();
+			productRequest.setTitle(title);
+			productRequest.setDescription(description);
+			productRequest.setPrice(price);
+			productRequest.setAuthor(author);
+			
+			// add product to marketplace
+			Product product = ProductDAO.AddPartnerProduct(productRequest); 
+			String id = product.getproductId();
+			
+			// add product to partner inventory
+			PartnerInventory newInventoryProduct = new PartnerInventory(product,quantity);
+			inventory1.addPartnerProduct(newInventoryProduct, id); 
+	   }
+
+
+	public void deletePartnerProduct(String id) {
+		// remove product from marketplace
+		productManager.removeProduct(id);
+		
+		// remove product from partner inventory
+		String bookTitle = inventory1.deletePartnerProduct(id);
+		System.out.println(bookTitle+" is deleted");
 	}
-
-	@Override
-	public void deleteProduct(Product product) {
+	
+	public void incresePartnerProductQuantity(String productID, int amount) {
+		
 		try {
-			inventory1.deleteProduct(product);
+			inventory1.incresePartnerProductQuantity(productID,amount);	 
 		}catch(Exception ex) {
-			System.out.println("Partner inventory service: Threw an error deleting "+ product);
-		}
-	}
-
-	@Override
-	public void increseQuantity(Product product, int amount) {
-		try {
-			inventory1.increseQuantity(product,amount);
-		}catch(Exception ex) {
-			System.out.println("Partner inventory service: Threw an error increasing "+ product+" quantity.");
+			System.out.println("Partner inventory service: Couldn't increasing "+" quantity of "+ productID);
 		}
 		
 	}
 
-	@Override
-	public void decreaseQuantity(Product product, int amount) {
+
+	public void decreasePartnerProductQuantity(String productId, int amount){
 		try {
-			inventory1.decreaseQuantity(product,amount);
+			inventory1.decreaseQuantity(productId,amount);
 		}catch(Exception ex) {
-			System.out.println("Partner inventory service: Threw an error decreasing "+ product+" quantity.");
-		}
-		
+			System.out.println("Partner inventory service:Couldn't decrease "+" quantity of "+ productId);
+		}	
 	}
 
 	@Override
-	public List<Product> reviewAllProducts() {
+	public List<PartnerInventory> reviewAllPartnerProducts() {
 		try {
 			return inventory1.reviewAllProducts();
 		}catch(Exception ex) {
-			System.out.println("Partner inventory service: Threw an error reviwing all partner's products");
+			System.out.println("Partner inventory service: Cant reviwing all partner' products");
 		}
 		return null;
 
 	}
 
+	
+	   
+	   
+	   
+	 
 }

@@ -94,5 +94,22 @@ public class ProductDAO {
         	  return;
           }
         }
-	}	
+    
+ public static Product AddPartnerProduct(ProductRequest productRequest) {
+ Product product = new Product();
+		
+		Random randomGenerator = new Random();
+	    int randomInt = randomGenerator.nextInt(10000);
+	    String productId = "PB" + randomInt;
+	    
+	  product.setproductId(productId);
+	  product.setTitle(productRequest.getTitle());
+		product.setDescription(productRequest.getDescription());
+		product.setPrice(productRequest.getPrice());
+		product.setAuthor(productRequest.getAuthor());
+	
+		products.add(product);
+		
+		return product;
+	}
 }

@@ -40,6 +40,7 @@ public class Partner {
 	public List<PartnerInventory> getInventory() {
 		return inventory;
 	}
+	
 	public void setInventory(List<PartnerInventory> inventory) {
 		this.inventory = inventory;
 	}

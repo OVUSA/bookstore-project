@@ -15,8 +15,9 @@ public class BookStoreServer {
         factoryBean.setResourceClasses(
         		com.ebook.service.customer.resource.CustomerResource.class,
         		com.ebook.service.item.resource.ProductResource.class, 
-        		com.ebook.service.Order.resource.OrderResource.class);
-       
+        		com.ebook.service.Order.resource.OrderResource.class
+//        new com.ebook.model.service.Partner.PartnerResource,class
+        		);
 //        /Setting up providers/
         List<ResourceProvider> rps = new ArrayList<ResourceProvider>();
         

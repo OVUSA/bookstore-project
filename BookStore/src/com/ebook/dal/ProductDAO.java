@@ -64,8 +64,7 @@ public class ProductDAO {
 	    product.setTitle(productRequest.getTitle());
 		product.setDescription(productRequest.getDescription());
 		product.setPrice(productRequest.getPrice());
-		product.setAuthor(productRequest.getAuthor());
-	
+		product.setAuthor(productRequest.getAuthor());	
 		products.add(product);
 		
 		return product;
@@ -85,7 +84,6 @@ public class ProductDAO {
           }
         }
 	}
-
 	public void removeProduct(String productId) {
 
 		Iterator<Product> it = products.iterator();
@@ -96,17 +94,16 @@ public class ProductDAO {
         	  return;
           }
         }
-	}
-	
-	public static Product AddPartnerProduct(ProductRequest productRequest) {
-        Product product = new Product();
+    
+ public static Product AddPartnerProduct(ProductRequest productRequest) {
+ Product product = new Product();
 		
 		Random randomGenerator = new Random();
 	    int randomInt = randomGenerator.nextInt(10000);
 	    String productId = "PB" + randomInt;
 	    
-	    product.setproductId(productId);
-	    product.setTitle(productRequest.getTitle());
+	  product.setproductId(productId);
+	  product.setTitle(productRequest.getTitle());
 		product.setDescription(productRequest.getDescription());
 		product.setPrice(productRequest.getPrice());
 		product.setAuthor(productRequest.getAuthor());
@@ -115,5 +112,4 @@ public class ProductDAO {
 		
 		return product;
 	}
-	
 }

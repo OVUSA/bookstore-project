@@ -1,4 +1,4 @@
-package com.ebook.model.service.Partner;
+package com.ebook.service.Partner.resource;
 
 import java.util.Set;
 import javax.ws.rs.GET;

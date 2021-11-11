@@ -1,4 +1,4 @@
-package com.ebook.model.service.Partner;
+package com.ebook.service.Partner.resource;
 
 import java.util.Set;
 import javax.ws.rs.GET;
@@ -17,7 +17,7 @@ import javax.ws.rs.QueryParam;
 import com.ebook.model.service.Partner.representation.PartnerRepresentation;
 import com.ebook.model.service.Partner.representation.PartnerRequest;
 import com.ebook.model.service.Partner.workflow.PartnerActivity;
-import com.ebook.model.service.Partner.workflow.PartnerInventoryActivity;
+import com.ebook.service.Partner.workflow.PartnerInventoryActivity;
 import com.ebook.service.item.representation.ProductRepresentation;
 import com.ebook.service.item.representation.ProductRequest;
 import com.ebook.service.item.workflow.ProductActivity;

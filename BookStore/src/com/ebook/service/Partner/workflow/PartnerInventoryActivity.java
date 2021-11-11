@@ -1,4 +1,4 @@
-package com.ebook.model.service.Partner.workflow;
+package com.ebook.service.Partner.workflow;
 
 import java.util.ArrayList;
 import java.util.HashSet;

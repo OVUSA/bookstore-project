@@ -1,14 +1,18 @@
 package com.ebook.model.partner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ebook.model.item.Product;
+
 public class Partner {
     private String name;
     private String partnerId;
-    private PartnerInventory inventory;
+    private List<PartnerInventory> inventory = new ArrayList<>();
    	private String partnerInfo;
     
    public Partner(String name,String partnerInformation) {
         this.name = name;
-        this.inventory = new PartnerInventory();
         this.partnerInfo = partnerInformation;
       }
    public Partner() {}
@@ -32,5 +36,15 @@ public class Partner {
 
     public String getPartnerInfo() {
 		return partnerInfo;
+	}
+	public List<PartnerInventory> getInventory() {
+		return inventory;
+	}
+	public void setInventory(List<PartnerInventory> inventory) {
+		this.inventory = inventory;
+	}
+	
+	public void addPartnerProduct(Product product, int quantity) {
+		inventory.add(new PartnerInventory(product,quantity));
 	}
 }

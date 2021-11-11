@@ -9,7 +9,7 @@ public class BookStoreClient2 {
 		
 		//Client will use the customer service to have access to anything related to customer functionality.
 	      System.out.println("*************** Creating Customer service object *************************");
-		CustomerService custService = new CustomerService();    
+		OrderService custService = new OrderService();    
 /**
 		System.out.println("BookStoreClient2: *************** instantiating a customer and its address *************************");
         Customer customer = new Customer();;

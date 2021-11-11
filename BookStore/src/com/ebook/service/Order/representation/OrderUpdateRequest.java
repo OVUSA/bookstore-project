@@ -1,4 +1,4 @@
-package com.ebook.service.representation;
+package com.ebook.service.Order.representation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

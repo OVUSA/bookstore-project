@@ -1,7 +1,7 @@
-package com.ebook.model.orderTest;
+package Test;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class OrderTest {
 	public Product getProduct() {
 		
 		Product pro1 = new Product();
-		pro1.setId("test");
+		pro1.setproductId("test");
 		pro1.setTitle("testtitle");
 		pro1.setPrice(99.00);
 		return pro1;
@@ -30,7 +30,7 @@ public class OrderTest {
 
 		Product expectedProd = obj1.getOrderDetails().get(0).getProduct();
 		
-		assertEquals(expectedProd.getId(), pro1.getId());
+		assertEquals(expectedProd.getproductId(), pro1.getproductId());
 		assertEquals(String.valueOf(expectedProd.getPrice()), String.valueOf(pro1.getPrice()));
 		assertEquals(expectedProd.getTitle(), pro1.getTitle());
 		

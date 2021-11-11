@@ -1,13 +1,13 @@
-package com.ebook.service;
+package com.ebook.service.Order.resource;
 
 
 import java.util.List;
 
 import javax.jws.WebService;
 
-import com.ebook.service.representation.OrderRepresentation;
-import com.ebook.service.representation.OrderRequest;
-import com.ebook.service.representation.OrderUpdateRequest;
+import com.ebook.service.Order.representation.OrderRepresentation;
+import com.ebook.service.Order.representation.OrderRequest;
+import com.ebook.service.Order.representation.OrderUpdateRequest;
 
 @WebService
 

@@ -1,6 +1,9 @@
 
 package com.ebook.model.partner;
 
+
+import java.util.List;
+
 import com.ebook.model.item.Product;
 
 public interface Inventory {

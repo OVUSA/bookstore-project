@@ -15,8 +15,8 @@ public class BookStoreServer {
         factoryBean.setResourceClasses(
         		com.ebook.service.customer.resource.CustomerResource.class,
         		com.ebook.service.item.resource.ProductResource.class, 
-        		com.ebook.service.Order.resource.OrderResource.class
-//        new com.ebook.model.service.Partner.PartnerResource,class
+        		com.ebook.service.Order.resource.OrderResource.class,
+                com.ebook.service.Partner.resource.PartnerResource.class
         		);
 //        /Setting up providers/
         List<ResourceProvider> rps = new ArrayList<ResourceProvider>();
@@ -24,7 +24,7 @@ public class BookStoreServer {
         rps.add(new SingletonResourceProvider(new com.ebook.service.customer.resource.CustomerResource()));
     	rps.add(new SingletonResourceProvider(new com.ebook.service.item.resource.ProductResource()));
     	rps.add(new SingletonResourceProvider(new com.ebook.service.Order.resource.OrderResource( )));
-//    	rps.add(new SingletonResourceProvider(new com.ebook.model.service.Partner.PartnerResource()));
+    	rps.add(new SingletonResourceProvider(new com.ebook.service.Partner.resource.PartnerResource()));
     	factoryBean.setResourceProviders(rps);
         
         

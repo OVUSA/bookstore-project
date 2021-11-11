@@ -32,5 +32,4 @@ public class  PartnerInventoryRequest {
 	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
-	
 }

@@ -16,8 +16,6 @@ public class PartnerInventoryRepresentation {
 	private String productId;
 	private String productName;
 	private double price;
-	
-	
 
 	public String getPartnerId() {
 		return partnerId;

@@ -4,8 +4,7 @@ import java.util.Set;
 
 import javax.jws.WebService;
 
-import com.ebook.model.partner.Partner;
-import com.ebook.model.service.Partner.representation.PartnerRepresentation;
+import com.ebook.service.Partner.representation.PartnerRepresentation;
 
 @WebService
 public interface PartnerService {

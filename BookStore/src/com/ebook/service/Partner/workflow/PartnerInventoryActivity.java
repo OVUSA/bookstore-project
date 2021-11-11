@@ -37,8 +37,9 @@ public class PartnerInventoryActivity {
 
 
 
-	public ProductRepresentation addProduct(String prodTitle, String prodDesc, double prodprice, String prodAuthor) {
-		Product p = new Product(prodTitle, prodDesc, prodprice, prodAuthor, null);
+	/*public ProductRepresentation addProduct(String prodTitle, String prodDesc, double prodprice, String prodAuthor) {
+		
+		
 
 		partnerInventoryManager.addProduct(p,1);
 
@@ -49,5 +50,5 @@ public class PartnerInventoryActivity {
 		pRep.setAuthor(p.getAuthor());
 
 		return pRep;
-	}
+	}*/
 }

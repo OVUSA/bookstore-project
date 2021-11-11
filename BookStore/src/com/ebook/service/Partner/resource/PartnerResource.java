@@ -8,15 +8,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.util.List;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.PUT;
-import javax.ws.rs.QueryParam;
 
-import com.ebook.model.service.Partner.representation.PartnerRepresentation;
-import com.ebook.model.service.Partner.representation.PartnerRequest;
-import com.ebook.model.service.Partner.workflow.PartnerActivity;
+import javax.ws.rs.DELETE;
+
+
+import com.ebook.service.Partner.representation.PartnerRepresentation;
+import com.ebook.service.Partner.representation.PartnerRequest;
+import com.ebook.service.Partner.workflow.PartnerActivity;
 
 
 @Path("/partnerservice/")

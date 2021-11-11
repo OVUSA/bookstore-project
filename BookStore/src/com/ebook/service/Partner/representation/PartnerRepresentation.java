@@ -1,4 +1,4 @@
-package com.ebook.model.service.Partner.representation;
+package com.ebook.service.Partner.representation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Partner")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
+
 public class PartnerRepresentation  {
 	private String partnerID;
 	private String partnerName;

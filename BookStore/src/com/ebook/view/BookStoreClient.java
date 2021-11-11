@@ -1,4 +1,4 @@
-package com.ebook.view;
+/*package com.ebook.view;
 
 import java.util.List;
 
@@ -143,4 +143,4 @@ public class BookStoreClient {
 	        
 		}
 
-}
+}*/

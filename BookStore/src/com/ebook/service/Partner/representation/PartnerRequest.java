@@ -1,4 +1,4 @@
-package com.ebook.model.service.Partner.representation;
+package com.ebook.service.Partner.representation;
 
 
 import javax.xml.bind.annotation.XmlAccessType;

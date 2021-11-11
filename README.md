@@ -5,6 +5,7 @@ luc ecommerce bookstore app
 Featured here are some sample responses and requests from the various service endpoints. Currently, each endpoint accepts JSON and XML, but all sample responses and requests are shown in XML. Additionally, each endpoint and its respective HTTP verb are shown.
 
 # Customer
+
 The Customer endpoint has the following URIs and corresponding methods:
 
 Get Customer by ID:
@@ -19,6 +20,7 @@ Get all customers:
 /customers
 ```
 Add customer:
+
 
 ```
 @POST
@@ -87,19 +89,22 @@ payload/body:
 ```
 POST MEDTHOD Response .........<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Product><productId>XY1756</productId><title>Mocking Jay Part 3</title><price>100.0</price><description>Sequel of the part 2</description><author>Alvin Chip</author></Product>
 
-````````````````
+
 Delete a product:
+
 ```
 @DELETE
 /productservice/product/{productId}
 ```
 DELETE MEDTHOD Response ......... OK
 
+
 # Partner
 
 The Partner endpoint has the following URIs and corresponding methods:
 
 Get partner by ID:
+
 ```
 @GET
 /partner/{partnerId} 
@@ -110,16 +115,21 @@ Get all partners:
 @GET
 /partners
 ```
+
 Add a partner:
+
 ```
 @POST
 /partners
 ```
+
 Delete a partner:
+
 ```
 @DELETE
 /partner/{partnerID}
 ```
+
 # Below are some sample requests and responses
 ```PartnerRequest``` sample :
 
@@ -130,6 +140,7 @@ Delete a partner:
     <partnerInfo>Children books</partnerInfo>
 </PartnerRequest>
 ```
+
 ```Partner```sample:
 
 ```

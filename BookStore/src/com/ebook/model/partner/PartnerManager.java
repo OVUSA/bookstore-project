@@ -25,7 +25,7 @@ public class PartnerManager {
 	  return partner;
    }
    
-   public Partner findPartnerById(String id) {
+   public static Partner findPartnerById(String id) {
 	 return partners.get(id);
    }
     

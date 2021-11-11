@@ -13,7 +13,7 @@ public class PartnerInventoryManager implements Inventory {
 	ProductManager productManager = new ProductManager();
 	
 
-	public void addPartnerProduct(String title,String description,int price, String author, int quantity) {
+	public void addPartnerProduct(String title,String description,double price, String author, int quantity) {
 			
 			ProductRequest productRequest = new ProductRequest();
 			productRequest.setTitle(title);
@@ -69,6 +69,9 @@ public class PartnerInventoryManager implements Inventory {
 		return null;
 
 	}
+
+
+	
 
 	
 	   

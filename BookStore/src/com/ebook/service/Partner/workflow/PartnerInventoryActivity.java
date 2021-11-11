@@ -5,50 +5,53 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import com.ebook.model.item.Product;
+import com.ebook.model.partner.PartnerInventory;
 import com.ebook.model.partner.PartnerInventoryManager;
-import com.ebook.service.item.representation.ProductRepresentation;
+import com.ebook.service.Partner.representation.PartnerInventoryRepresentation;
 
 public class PartnerInventoryActivity {
 
 	private static PartnerInventoryManager partnerInventoryManager = new PartnerInventoryManager();
 
-	public Set<ProductRepresentation> getPartnerProducts() {
+	public List<PartnerInventoryRepresentation> getPartnerProducts() {
 
-		Set<ProductRepresentation> ProductRepresentations = new HashSet<ProductRepresentation>();
-		List<Product> partnerInvRepresentation = new ArrayList<Product>();
-		partnerInvRepresentation = partnerInventoryManager.reviewAllProducts();
+		Set<PartnerInventory> partnerProducts = new HashSet<PartnerInventory>();
+		List<PartnerInventoryRepresentation> partnerInvRepresentation = new ArrayList<PartnerInventoryRepresentation>();
+		partnerProducts = (Set<PartnerInventory>) partnerInventoryManager.reviewAllPartnerProducts();
 
-		Iterator<Product> it = partnerInvRepresentation.iterator();
+		Iterator<PartnerInventory> it = partnerProducts.iterator();
 		while(it.hasNext()) {
-			Product p = (Product)it.next();
-			ProductRepresentation ProductRepresentation = new ProductRepresentation();
-			ProductRepresentation.setTitle(p.getTitle());
-			ProductRepresentation.setPrice(p.getPrice());
-			ProductRepresentation.setDescription(p.getDescription());
-			ProductRepresentation.setAuthor(p.getAuthor());
-
-
-			ProductRepresentations.add(ProductRepresentation);
-		}
-		return ProductRepresentations;
+			  PartnerInventory p = (PartnerInventory)it.next();
+			  Product pr = p.getProduct();
+			  PartnerInventoryRepresentation PartnerInventoryRepresentation = new PartnerInventoryRepresentation();
+	          PartnerInventoryRepresentation.setTitle(pr.getTitle());
+	          PartnerInventoryRepresentation.setPrice(pr.getPrice());
+	          PartnerInventoryRepresentation.setDescription(pr.getDescription());
+	          PartnerInventoryRepresentation.setAuthor(pr.getAuthor());
+	          
+	          partnerInvRepresentation.add(PartnerInventoryRepresentation);
+	        }
+		return partnerInvRepresentation;
 	}
 
 
-
-	/*public ProductRepresentation addProduct(String prodTitle, String prodDesc, double prodprice, String prodAuthor) {
+	public PartnerInventoryRepresentation addPartnerProduct(String prodTitle, String prodDesc, double prodprice, String prodAuthor,int quantity) {
 		
-		
+		PartnerInventory partInv = partnerInventoryManager.addPartnerProduct(prodTitle, prodDesc, prodprice, prodAuthor, quantity);
 
-		partnerInventoryManager.addProduct(p,1);
+		PartnerInventoryRepresentation pInvRep = new PartnerInventoryRepresentation();
+		Product p = partInv.getProduct();
+		pInvRep .setTitle(p.getTitle());
+		pInvRep .setDescription(p.getDescription());
+		pInvRep .setPrice(p.getPrice());
+		pInvRep .setAuthor(p.getAuthor());
 
-		ProductRepresentation pRep = new ProductRepresentation();
-		pRep.setTitle(p.getTitle());
-		pRep.setDescription(p.getDescription());
-		pRep.setPrice(p.getPrice());
-		pRep.setAuthor(p.getAuthor());
-
-		return pRep;
-	}*/
+		return pInvRep ;
+	}
+	
+	public String removePartnerProduct(String id) {
+		partnerInventoryManager.deletePartnerProduct(id);
+		return "OK";
+	}
 }

@@ -1,10 +1,10 @@
-package com.ebook.service;
+package com.ebook.service.Order.resource;
 
 
-import com.ebook.service.item.workflow.OrderActivity;
-import com.ebook.service.representation.OrderRepresentation;
-import com.ebook.service.representation.OrderRequest;
-import com.ebook.service.representation.OrderUpdateRequest;
+import com.ebook.service.Order.workflow.OrderActivity;
+import com.ebook.service.Order.representation.OrderRepresentation;
+import com.ebook.service.Order.representation.OrderRequest;
+import com.ebook.service.Order.representation.OrderUpdateRequest;
 
 import java.util.List;
 

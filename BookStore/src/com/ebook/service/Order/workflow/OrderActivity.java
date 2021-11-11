@@ -1,12 +1,12 @@
-package com.ebook.service.workflow;
+package com.ebook.service.Order.workflow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ebook.dal.OrderDAO;
 import com.ebook.model.order.Order;
-import com.ebook.service.representation.OrderRepresentation;
-import com.ebook.service.representation.OrderRequest;
+import com.ebook.service.Order.representation.OrderRepresentation;
+import com.ebook.service.Order.representation.OrderRequest;
 
 
 public class OrderActivity {

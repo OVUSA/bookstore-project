@@ -64,8 +64,7 @@ public class ProductDAO {
 	    product.setTitle(productRequest.getTitle());
 		product.setDescription(productRequest.getDescription());
 		product.setPrice(productRequest.getPrice());
-		product.setAuthor(productRequest.getAuthor());
-	
+		product.setAuthor(productRequest.getAuthor());	
 		products.add(product);
 		
 		return product;
@@ -85,7 +84,6 @@ public class ProductDAO {
           }
         }
 	}
-
 	public void removeProduct(String productId) {
 
 		Iterator<Product> it = products.iterator();
@@ -96,6 +94,5 @@ public class ProductDAO {
         	  return;
           }
         }
-	}
-	
+	}	
 }

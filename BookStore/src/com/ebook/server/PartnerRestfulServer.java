@@ -1,4 +1,4 @@
-package com.ebook.server;
+package com.ebook.Server;
 
 
 import org.apache.cxf.endpoint.Server;
@@ -9,8 +9,8 @@ public class PartnerRestfulServer {
 
 		public static void main(String args[]) throws Exception {
 	        JAXRSServerFactoryBean factoryBean = new JAXRSServerFactoryBean();
-	        factoryBean.setResourceClasses(com.ebook.model.service.Partner.PartnerResource.class);
-	        factoryBean.setResourceProvider(new SingletonResourceProvider(new com.ebook.model.service.Partner.PartnerResource()));
+	        factoryBean.setResourceClasses(com.ebook.service.Partner.resource.PartnerResource.class);
+	        factoryBean.setResourceProvider(new SingletonResourceProvider(new com.ebook.service.Partner.resource.PartnerResource()));
 	        factoryBean.setAddress("http://localhost:8081/");
 	        Server server = factoryBean.create();
 

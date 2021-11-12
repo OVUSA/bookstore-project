@@ -10,24 +10,25 @@ import com.ebook.service.item.representation.ProductRequest;
 
 public class PartnerInventoryManager implements Inventory {
 	private static PartnerInventoryDAO inventory1= new PartnerInventoryDAO();
-	ProductManager productManager = new ProductManager();
+	public ProductManager productManager = new ProductManager();
 	
 
-	public void addPartnerProduct(String title,String description,double price, String author, int quantity) {
+	public PartnerInventory addPartnerProduct(String title,String description,double price, String author, int quantity) {
 			
-			ProductRequest productRequest = new ProductRequest();
-			productRequest.setTitle(title);
-			productRequest.setDescription(description);
-			productRequest.setPrice(price);
-			productRequest.setAuthor(author);
+		ProductRequest productRequest = new ProductRequest();
+		productRequest.setTitle(title);
+		productRequest.setDescription(description);
+		productRequest.setPrice(price);
+		productRequest.setAuthor(author);
 			
 			// add product to marketplace
-			Product product = ProductDAO.AddPartnerProduct(productRequest); 
-			String id = product.getproductId();
+		Product product = ProductDAO.AddPartnerProduct(productRequest); 
+		String id = product.getproductId();
 			
 			// add product to partner inventory
-			PartnerInventory newInventoryProduct = new PartnerInventory(product,quantity);
-			inventory1.addPartnerProduct(newInventoryProduct, id); 
+		PartnerInventory newInventoryProduct = new PartnerInventory(product,quantity);
+		inventory1.addPartnerProduct(newInventoryProduct, id); 
+		return newInventoryProduct;
 	   }
 
 

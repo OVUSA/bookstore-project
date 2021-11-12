@@ -10,26 +10,49 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 
 public class  PartnerInventoryRequest {
-	private String partnerId;
-	private String productTitle;
-	private double productPrice;
+	private String productId;
+	private String title;
+	private double price;
+	private String description;
+	private String author;
+	private int quantity;
 
-	public String getPartnerId() {
-		return partnerId;
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setPartnerId(String partnerId) {
-		this.partnerId = partnerId;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
-	public String getProductTitle() {
-		return productTitle;
+	public String getProductId() {
+		return productId;
 	}
-	public void setProductTitle(String productTitle) {
-		this.productTitle = productTitle;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
-	public double getProductPrice() {
-		return productPrice;
+	public String getTitle() {
+		return title;
 	}
-	public void setProductPrice(double productPrice) {
-		this.productPrice = productPrice;
+	public void setTitle(String title) {
+		this.title = title;
 	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	
+	
 }

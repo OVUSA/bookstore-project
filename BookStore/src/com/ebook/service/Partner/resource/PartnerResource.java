@@ -18,7 +18,7 @@ import com.ebook.service.Partner.workflow.PartnerActivity;
 
 
 @Path("/partnerservice/")
-public class PartnerResource {
+public class PartnerResource implements PartnerService{
 	
 		
 	@GET
@@ -30,7 +30,6 @@ public class PartnerResource {
 		return partnerActivity.getPartnerById(partnerID);
 	}
 	
-
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partners")
@@ -63,6 +62,4 @@ public class PartnerResource {
 	}
 	
 }
-
-
 

@@ -29,7 +29,7 @@ public class PartnerActivity {
 
 	
 	public PartnerRepresentation getPartnerById(String id) {
-		Partner partner = partnerManager.findPartnerById(id);
+		Partner partner = PartnerManager.findPartnerById(id);
 		
 		PartnerRepresentation partRep = new PartnerRepresentation();
 		partRep.setPartnerName(partner.getPartnerName());
@@ -43,12 +43,10 @@ public class PartnerActivity {
 	public PartnerRepresentation addPartner(String name, String partnerInfo){
 		
 		Partner partner = partnerManager.addPartner(name,partnerInfo);
-		
-		PartnerRepresentation partRep = new PartnerRepresentation();
-		partRep.setPartnerName(partner.getPartnerName());
-		partRep.setPartnerInfo(partner.getPartnerInfo());
+		PartnerRepresentation partRep = new PartnerRepresentation();	
 		partRep.setPartnerID(partner.getpartnerId());
-			
+		partRep.setPartnerInfo(partner.getPartnerInfo());
+		partRep.setPartnerName(partner.getPartnerName());
 		return partRep;
 	}
 	

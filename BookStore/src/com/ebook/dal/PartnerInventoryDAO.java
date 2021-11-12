@@ -7,47 +7,48 @@ import java.util.Map;
 
 import com.ebook.model.item.Product;
 import com.ebook.model.partner.Inventory;
+import com.ebook.model.partner.PartnerInventory;
 
-public class PartnerInventoryDAO implements Inventory{
+public class PartnerInventoryDAO {
+	
 	public PartnerInventoryDAO() {
 		
 	}
-
-    // Integer value keeps track of remain quantity of the product.
-    Map <Product,Integer> partnerInventory = new HashMap<>();
+   
+    Map <String,PartnerInventory> partnerInventory = new HashMap<>();
     
-	@Override
-	public void deleteProduct(Product product) {
-		partnerInventory.remove(product);
-	}
-	
-	@Override
-	// Increase the quantity by amount(amount can be 1 or more)
-	public void increseQuantity(Product product, int amount) {
-		Integer k = partnerInventory.get(product);
-		partnerInventory.put(product,k+amount);
+	public void addPartnerProduct(PartnerInventory product, String productId) {
+		partnerInventory.put(productId,product);
 		
 	}
-	@Override
-	public void decreaseQuantity(Product product, int amount) {
-		Integer k = partnerInventory.get(product);
-		partnerInventory.put(product,k-amount);
+
+	public String deletePartnerProduct(String id) {
+		 PartnerInventory pr = partnerInventory.remove(id);
+		 return pr.getProduct().getTitle();
 	}
 
+	
+	public void incresePartnerProductQuantity(String productId, int amount) {
+		 PartnerInventory pr = partnerInventory.get(productId);
+		 int quantity = pr.getQuantity();
+		 pr.setQuantity(quantity+amount);
+	
+	}
 
-	@Override
-	public List<Product> reviewAllProducts() {
-		List<Product>partnerInv = new ArrayList<>();
+	public void decreaseQuantity(String productId, int amount) {
+		PartnerInventory pr = partnerInventory.get(productId);
+		 int quantity = pr.getQuantity();
+		 pr.setQuantity(quantity-amount);
+		
+	}
+	
+	public List<PartnerInventory> reviewAllProducts() {
+		List<PartnerInventory>partnerInv = new ArrayList<>();
 
-		for (Product partProdu:partnerInventory.keySet()) {
-			partnerInv.add(partProdu);
+		for (Map.Entry<String,PartnerInventory> partProdu:partnerInventory.entrySet()) {
+			partnerInv.add(partProdu.getValue());
 		}
 		return partnerInv;
 	}
-	
-	@Override
-	public void addProduct(Product product, int quantity) {
-		partnerInventory.put(product,quantity);
-		
-	}
 }
+

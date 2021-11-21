@@ -7,11 +7,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.ebook.service.AbstractRepresentation.AbstractRepresentation;
+
 @XmlRootElement(name = "PartnerInventory")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 
-public class PartnerInventoryRepresentation {
+public class PartnerInventoryRepresentation extends AbstractRepresentation  {
 	private String productId;
 	private String title;
 	private double price;

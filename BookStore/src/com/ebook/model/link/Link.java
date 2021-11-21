@@ -5,7 +5,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Link {
 	private String relation;
 	private String url;
-	private String MediaType;
+	private String mediaType;
+	
+	public Link() {}
+	
+	public Link(String rel, String url, String mediaType) {
+		this.relation = rel;
+		this.url = url;
+		this.mediaType = mediaType;
+	}
 	
 	public String getRealtion() {
 		return relation;
@@ -24,11 +32,11 @@ public class Link {
 	}
 
 	public String getMediaType() {
-		return MediaType;
+		return mediaType;
 	}
 
 	public void setMediaType(String mediaType) {
-		MediaType = mediaType;
+		this.mediaType = mediaType;
 	}
 	
 }

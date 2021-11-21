@@ -93,7 +93,9 @@ public class ProductDAO {
         	  products.remove(p);
         	  return;
           }
-        }
+		}
+	}
+        
     
  public static Product AddPartnerProduct(ProductRequest productRequest) {
  Product product = new Product();

@@ -6,9 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import com.ebook.model.item.Product;
+import com.ebook.model.link.Link;
 import com.ebook.model.partner.PartnerInventory;
 import com.ebook.model.partner.PartnerInventoryManager;
 import com.ebook.service.Partner.representation.PartnerInventoryRepresentation;
+import com.ebook.service.Partner.representation.PartnerRepresentation;
 
 public class PartnerInventoryActivity {
 
@@ -32,6 +34,9 @@ public class PartnerInventoryActivity {
 	          
 	          partnerInvRepresentation.add(PartnerInventoryRepresentation);
 	        }
+		addPartnerProductLinks(); // add product
+		
+		
 		return partnerInvRepresentation;
 	}
 
@@ -46,6 +51,8 @@ public class PartnerInventoryActivity {
 		pInvRep .setDescription(p.getDescription());
 		pInvRep .setPrice(p.getPrice());
 		pInvRep .setAuthor(p.getAuthor());
+		
+		viewPartnerProductLinks();// view all products
 
 		return pInvRep ;
 	}
@@ -53,5 +60,19 @@ public class PartnerInventoryActivity {
 	public String removePartnerProduct(String id) {
 		partnerInventoryManager.deletePartnerProduct(id);
 		return "OK";
+	}
+	
+	private void addPartnerProductLinks() { 
+			
+		Link addProduct = new Link("view_Partner","http://localhost:8081/partner_product", "application/xml");	
+		PartnerInventoryRepresentation partnerInvRep = new PartnerInventoryRepresentation();
+		partnerInvRep.setLinks(addProduct);
+	}
+	
+	private void viewPartnerProductLinks() { 
+		
+		Link addProduct = new Link("view_Partner_Products","http://localhost:8081//partner_products", "application/xml");	
+		PartnerInventoryRepresentation partnerInvRep = new PartnerInventoryRepresentation();
+		partnerInvRep.setLinks(addProduct);
 	}
 }

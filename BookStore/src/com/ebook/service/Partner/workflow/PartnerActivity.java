@@ -4,8 +4,10 @@ import java.util.HashSet;
 
 import java.util.Set;
 
+import com.ebook.model.link.Link;
 import com.ebook.model.partner.Partner;
 import com.ebook.model.partner.PartnerManager;
+import com.ebook.service.Partner.representation.PartnerInventoryRepresentation;
 import com.ebook.service.Partner.representation.PartnerRepresentation;
 
 
@@ -23,7 +25,7 @@ public class PartnerActivity {
 			PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 			((Partner) partnersRepresentations).setName(partner.getPartnerName());
 			 partnersRepresentations.add(partnerRepresentation);
-         }         
+         }  		
 		return partnersRepresentations;
      }
 
@@ -47,11 +49,29 @@ public class PartnerActivity {
 		partRep.setPartnerID(partner.getpartnerId());
 		partRep.setPartnerInfo(partner.getPartnerInfo());
 		partRep.setPartnerName(partner.getPartnerName());
+		
+		getPartnerLinks(partRep);
 		return partRep;
 	}
 	
 	public String deletePartner(String id) {
 		partnerManager.removePartner(id);
+				
 		return "Partner is deleted";
+	}
+	 
+	
+	// str str str
+	
+	private void getPartnerLinks(PartnerRepresentation partnerRep) { // get PartnerID
+		// then look at the partner products
+		Link viewPartner = new Link("view_Partner","http://localhost:8081/partner/{partnerID}", "application/xml");	
+		partnerRep.setLinks(viewPartner);
+	}
+	
+	private void viewPartners(PartnerRepresentation partnerRep) { 
+		
+		Link viewPartner = new Link("view_Partners","http://localhost:8081/partners", "application/xml");	
+		partnerRep.setLinks(viewPartner);
 	}
 }

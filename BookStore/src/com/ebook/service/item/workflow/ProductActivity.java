@@ -6,6 +6,9 @@ import java.util.Set;
 
 import com.ebook.model.item.Product;
 import com.ebook.model.item.ProductManager;
+import com.ebook.model.link.Link;
+import com.ebook.service.common.MediaTypes;
+import com.ebook.service.common.URIs;
 import com.ebook.service.item.representation.ProductRepresentation;
 import com.ebook.service.item.representation.ProductRequest;
 
@@ -30,6 +33,8 @@ public class ProductActivity {
 	          ProductRepresentation.setAuthor(p.getAuthor());
 	          
 	          ProductRepresentations.add(ProductRepresentation);
+	          
+	          setLinks(ProductRepresentation);
 	        }
 		return ProductRepresentations;
 		
@@ -46,6 +51,8 @@ public class ProductActivity {
 		pRep.setDescription(product.getDescription());
 		pRep.setAuthor(product.getAuthor());
 		
+		setLinks(pRep);
+		
 		return pRep;
 	}
 	
@@ -59,6 +66,8 @@ public class ProductActivity {
 		pRep.setPrice(p.getPrice());
 		pRep.setAuthor(p.getAuthor());
 		
+		setDetailedLinks(pRep);
+		
 		return pRep;
 	}
     
@@ -68,4 +77,37 @@ public class ProductActivity {
 		
 		return "OK";
 	}
+    
+    private void setLinks(ProductRepresentation prLink) {
+    	
+    	//for(ProductRepresentation pr: ProductRepresentation) {			
+    		//List<Link> links = new ArrayList<>();
+    		
+    		// view product
+    		//Link viewProduct = new Link(URIs.PRODUCTS+"/"+prLink.getproductId(),"View Product",MediaTypes.JSON);		
+    		//links.add(viewProduct);
+    		
+    		//place order		
+    		Link placeOrder = new Link(URIs.ORDER,"Place order",MediaTypes.JSON);
+    		//links.add(placeOrder);
+    		
+    		//Link[] linkArray = new Link[links.size()];
+    		prLink.setLinks(placeOrder);
+    		
+    		//prLink.addLinks(new Link(URIs.PRODUCTS+"/"+prLink.getproductId(),"View Product",MediaTypes.JSON));
+        	//prLink.addLinks(new Link(URIs.ORDER,"Place order",MediaTypes.JSON));
+    	//}
+    	
+    }
+
+    private void setDetailedLinks(ProductRepresentation prLinkDetail) {
+    	
+    	Link viewProduct = new Link(URIs.PRODUCTS+"/"+prLinkDetail.getproductId(),"View Product",MediaTypes.JSON);
+    	prLinkDetail.setDeatiledLinks(viewProduct);
+    }
+
+    /*private void setAfterDeleteLinks(ProductRepresentation prAfterDeleteLink){
+    	Link viewProduct = new Link(URIs.PRODUCTS+"/"+prAfterDeleteLink.getproductId(),"View Product",MediaTypes.JSON);
+    	prAfterDeleteLink.setDeatiledLinks(viewProduct);	
+    }*/
 }

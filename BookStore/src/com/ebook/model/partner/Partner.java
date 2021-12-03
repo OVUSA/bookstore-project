@@ -11,10 +11,18 @@ public class Partner {
     private List<PartnerInventory> inventory = new ArrayList<>();
    	private String partnerInfo;
     
-   public Partner(String name,String partnerInformation) {
+   public Partner(String id,String name,String partnerInformation) {
+	    this.partnerId = id;
         this.name = name;
         this.partnerInfo = partnerInformation;
       }
+   
+   public Partner(String name,String partnerInformation) {
+	   
+       this.name = name;
+       this.partnerInfo = partnerInformation;
+     }
+   
    public Partner() {}
 
 

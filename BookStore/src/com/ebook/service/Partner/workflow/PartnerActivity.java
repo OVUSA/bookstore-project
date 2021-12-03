@@ -1,13 +1,13 @@
 package com.ebook.service.Partner.workflow;
 
 import java.util.HashSet;
-
+import java.util.Iterator;
 import java.util.Set;
 
 import com.ebook.model.link.Link;
 import com.ebook.model.partner.Partner;
 import com.ebook.model.partner.PartnerManager;
-import com.ebook.service.Partner.representation.PartnerInventoryRepresentation;
+
 import com.ebook.service.Partner.representation.PartnerRepresentation;
 
 
@@ -17,15 +17,19 @@ public class PartnerActivity {
 	
 	public Set<PartnerRepresentation> getPartners() {
 		
-		Set<Partner> partners= new HashSet<Partner>();
+		Set<Partner> partners= partnerManager.getAllPartners();
 		Set<PartnerRepresentation> partnersRepresentations = new HashSet<PartnerRepresentation>();
-	    partners = partnerManager.getAllPartners();
 		
-		for (Partner partner:partners){		
-			PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
-			((Partner) partnersRepresentations).setName(partner.getPartnerName());
-			 partnersRepresentations.add(partnerRepresentation);
-         }  		
+		Iterator<Partner>it = partners.iterator();
+		while(it.hasNext()) {
+			Partner part = it.next();
+			PartnerRepresentation partRep = new PartnerRepresentation();
+			partRep.setPartnerName(part.getPartnerName());
+			partRep.setPartnerInfo(part.getPartnerInfo());
+			partRep.setPartnerID(part.getpartnerId());
+			
+			partnersRepresentations.add(partRep);		
+		}
 		return partnersRepresentations;
      }
 
@@ -57,11 +61,11 @@ public class PartnerActivity {
 	public String deletePartner(String id) {
 		partnerManager.removePartner(id);
 				
-		return "Partner is deleted";
+		return "OK";
 	}
 	 
 	
-	// str str str
+
 	
 	private void getPartnerLinks(PartnerRepresentation partnerRep) { // get PartnerID
 		// then look at the partner products

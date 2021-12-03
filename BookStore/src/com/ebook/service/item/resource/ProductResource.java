@@ -4,20 +4,65 @@ import java.util.Set;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.apache.cxf.rs.security.cors.CorsHeaderConstants;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+import org.apache.cxf.rs.security.cors.LocalPreflight;
 
 import com.ebook.service.item.representation.ProductRepresentation;
 import com.ebook.service.item.representation.ProductRequest;
 import com.ebook.service.item.workflow.ProductActivity;
 
+@CrossOriginResourceSharing(
+        allowOrigins = {"http://localhost:8080/"}, 
+        allowCredentials = true,
+        		allowHeaders = {        				
+                    "'Accept': 'application/json'",
+                    "'Content-Type': 'application/json'"                
+        		        }        		         
+)
 @Path("/productservice/")
 public class ProductResource implements ProductService {
 
+	@Context
+	private HttpHeaders headers;	
+	
+	@OPTIONS
+	@Path("/producservice/product")
+    @LocalPreflight
+    public Response options() {
+        String origin = headers.getRequestHeader("Origin").get(0);
+        
+        if("http://localhost:8080/".equals(origin)) {return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "*")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+                           .build();
+        }else {
+        	return Response.ok().build();
+        }       
+    }
+
+	@GET
+	@Produces({"application/json" , "application/xml"})
+	@Path("/product")
+	public Set<ProductRepresentation> getAllProducts() {
+		// response.addHeader("Access-Control-Allow-Origin", "*");
+		System.out.println("GET METHOD Request from Client for All Products................. ");
+		ProductActivity pActivity = new ProductActivity();
+		return pActivity.getAllProducts();
+	}
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/product")

@@ -1,46 +1,33 @@
 package com.ebook.model.partner;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
 import java.util.Set;
+
+import com.ebook.dal.PartnerDAO;
 
 public class PartnerManager {
     public PartnerManager(){}
     
-   private static HashMap<String,Partner>partners = new HashMap<>();
+   private static PartnerDAO partners = new PartnerDAO();
    
    
    public Partner addPartner(String name, String partnerInfo) {
-	   
-	  Partner partner = new Partner(name, partnerInfo);
-	  
-	  Random randomGenerator = new Random();
-	  int randomInt = randomGenerator.nextInt(10000);
-	  String id = "PI" + randomInt;
-	  
-	  partner.setpartnerId(id);
-	 
-	  partners.put(id,partner);
-	  return partner;
+	  Partner partnerNew = partners.addPartner(name,partnerInfo);
+	  return partnerNew;
    }
    
+   
    public static Partner findPartnerById(String id) {
-	 return partners.get(id);
+	 return partners.findPartnerById(id);
    }
     
+   
    public void removePartner(String id) {
-	   partners.remove(id);
-	  
+	   partners.removePartner(id);	  
    }
 
    
    public Set<Partner>getAllPartners(){
-	   Set<Partner> partners = new HashSet<>();
-	   Iterator<Partner>partner = partners.iterator();
-	   while(partner.hasNext()) {
-		   partners.add((Partner) partner);
-	   }
-	   return partners;
+	   Set<Partner> list_partners = partners.getAllPartners();
+	   
+	   return list_partners;
    }
 }

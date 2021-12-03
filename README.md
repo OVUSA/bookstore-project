@@ -117,19 +117,17 @@ Get all partners:
 ```
 Respond:
 ```
-<?xml version="1.0" encoding="UTF-8"?>
-<Partners>
-    <Partner>
-        <partnerID>PI123</partnerID>
-        <partnerName>Shiny Owl Books</partnerName>
-        <partnerInfo>Welcome to Shiny Owl Books, a general bookshop with several room with 15,000 books in the shop. We sell a wide variety of Fiction, Factual and Childrens Books including many thousands of paperback novels, childrens books and popular non-fiction titles</partnerInfo>
-    </Partner>
-    <Partner>
-        <partnerID>PI147</partnerID>
-        <partnerName>Amazon Books</partnerName>
-        <partnerInfo>Amazon Books is a customer-focused store, designed to spur discovery; a place where customers can find great books and products of paperback novels, childrens books and popular non-fiction titles</partnerInfo>
-    </Partner>
-</Partners>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Partner>
+    <link>
+        <mediaType>application/xml</mediaType>
+        <realtion>view_All_Partners</realtion>
+        <url>http://localhost:8080/partnerservice/partners</url>
+    </link>
+    <partnerID>PI123</partnerID>
+    <partnerName>Shiny Owl Books</partnerName>
+    <partnerInfo>Welcome to Shiny Owl Books, a general bookshop with several room with 15,000 books in the shop. We sell a wide variety of Fiction, Factual and Childrens Books including many thousands of paperback novels, childrens books and popular non-fiction titles</partnerInfo>
+</Partner>
 ```
 Add a partner:
 

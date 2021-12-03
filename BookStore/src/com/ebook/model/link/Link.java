@@ -3,40 +3,40 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Link")
 public class Link {
-	private String relation;
 	private String url;
-	private String mediaType;
+	private String rel;
+	private String type;
 	
-	public Link() {}
+	 public Link() {}
 	
-	public Link(String rel, String url, String mediaType) {
-		this.relation = rel;
+	public Link(String url,String rel, String type) {
+		
 		this.url = url;
-		this.mediaType = mediaType;
+		this.rel = rel;
+		this.type = type;
 	}
 	
-	public String getRealtion() {
-		return relation;
+	public String getRel() {
+		return rel;
 	}
 
-	public void setRealtion(String realtion) {
-		this.relation = realtion;
+	public void setRel(String rel) {
+		this.rel = rel;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	public String getUrl() {
 		return url;
 	}
-
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public String getMediaType() {
-		return mediaType;
-	}
-
-	public void setMediaType(String mediaType) {
-		this.mediaType = mediaType;
 	}
 	
 }

@@ -19,4 +19,12 @@ public abstract class AbstractRepresentation {
 	public void setLinks(Link...links) {
 		this.links = Arrays.asList(links);
 	}
+	
+	public void setDeatiledLinks(Link...links) {
+		this.links = Arrays.asList(links);
+	}
+	
+	/*public void addLinks(Link link){
+		links.add(link);
+	}*/
 }

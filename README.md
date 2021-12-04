@@ -164,6 +164,31 @@ Delete a partner:
     <partnerInfo>Children books</partnerInfo>
 </Partner>
 ```
+```PartnerProducts``` sample :
+```http://localhost:8080/partnerservice/PI147/partner_products```
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<PartnerInventorys>
+    <PartnerInventory>
+        <link>
+            <mediaType>application/xml</mediaType>
+            <rel>delete_product</rel>
+            <url>http://localhost:8081/partnerservice/{partnerId}/{productId}</url>
+        </link>
+        <product>
+            <productId>PI51</productId>
+            <title>A Game of Thrones</title>
+            <price>20.1</price>
+            <description>Fantasy novel</description>
+            <author>George R. R. Martin</author>
+        </product>
+        <quantity>10</quantity>
+    </PartnerInventory>
+```
+
+
+
 # Order
 The order endpoint has the following URIs and corresponding methods:
 

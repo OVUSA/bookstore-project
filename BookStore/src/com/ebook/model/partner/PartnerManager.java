@@ -49,21 +49,20 @@ public class PartnerManager {
 		productRequest.setDescription(description);
 		productRequest.setPrice(price);
 		productRequest.setAuthor(author);
-			
+		
 			// add product to marketplace
-		Product product = ProductDAO.AddPartnerProduct(productRequest); 
+		Product product = ProductDAO.AddPartnerProduct(productRequest); 	
 		String id = product.getproductId();
-			
 			// add product to partner inventory
-		partners.addProduct(partnerId, product, quantity);
+		partners.addProduct(id, partnerId, product, quantity);
 		return product;
 	 }
    
    
-   public String deleteProduct(String partnerId, String productId) {
+   public String deleteProduct(String productId) {
 	  try {  
-		 market.removeProduct(productId);
-		 return partners.deleteProduct(partnerId, productId);	 
+		market.removeProduct(productId);
+		return partners.deleteProduct(productId);	 
 	  }catch(Exception ex) {
 		  System.out.print("Couldn't find product on a marketplace");
 	  }

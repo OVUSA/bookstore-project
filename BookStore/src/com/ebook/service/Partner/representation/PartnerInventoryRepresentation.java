@@ -8,60 +8,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.ebook.service.AbstractRepresentation.AbstractRepresentation;
+import com.ebook.service.item.representation.ProductRepresentation;
 
 @XmlRootElement(name = "PartnerInventory")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 
 public class PartnerInventoryRepresentation extends AbstractRepresentation  {
-	private String productId;
-	private String title;
-	private double price;
-	private String description;
-	private String author;
+	private ProductRepresentation product;
+	private int quantity;
 	
 	public PartnerInventoryRepresentation(){
 		
 	}
-		
-	public String getproductId() {
-		return productId;
-	}
-
-	public void setproductId(String productId) {
-		this.productId = productId;
+	
+	public PartnerInventoryRepresentation(ProductRepresentation product, int amount){
+		this.product = product;
+		this.quantity = amount;
 	}
 	
-	public String getTitle() {
-		return title;
+	public ProductRepresentation getProduct() {
+		return product;
 	}
-	
-	public void setTitle(String title) {
-		this.title = title;
+	public void setProduct(ProductRepresentation product) {
+		this.product = product;
 	}
-	
-	public double getPrice() {
-		return price;
+	public int getQuantity() {
+		return quantity;
 	}
-	
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public String getAuthor() {
-		return author;
-	}
-	
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 		
 }

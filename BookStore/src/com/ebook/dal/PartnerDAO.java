@@ -1,9 +1,11 @@
 package com.ebook.dal;
 
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import com.ebook.model.item.Product;
@@ -42,12 +44,13 @@ public class PartnerDAO {
     	pr3.setPrice(30.50);
     	pr3.setproductId("PI42");
     	
+    	PartnerInventory pri1 = new PartnerInventory(pr3,10);
+    	
     	Partner partner2 = new Partner("PI147","Amazon Books","Amazon Books is a customer-focused store, "
     			+ "designed to spur discovery; a place where customers can find great books and products"
     	   		+ " of paperback novels, childrens books and popular non-fiction titles");
     	   
     	partner2.addPartnerProduct(pr2,10);   
-    	partner2.addPartnerProduct(pr3,10);   
     	partners.put("PI147",partner2);  
     }
    
@@ -59,7 +62,9 @@ public class PartnerDAO {
 	  Partner partner = new Partner(id, name, partnerInfo);
 	  partners.put(id,partner);
 	  return partner;
-   } 
+   }
+   
+   
    
    public Partner findPartnerById(String id) {
 	 return partners.get(id);
@@ -84,28 +89,45 @@ public class PartnerDAO {
 		return pr.getInventory();		
 	} 
    
-   public void addProduct(String id,Product product, int quantity) {
-	   Partner pr = findPartnerById(id);
-	   pr.addPartnerProduct(product, quantity);
-	   
+   public void addProduct(String productId,String partnerid,Product product, int quantity) {
+	   Partner partner = findPartnerById(partnerid);
+	   partner.addPartnerProduct(product,quantity);	  
+
    }
    
-   public String deleteProduct(String partnerId, String productId) {
-	   Partner partner = partners.get(partnerId);
+   public String deleteProduct(String productId) {
+	   String prID = findPartnerbyProduct(productId);
+	   Partner partner = findPartnerById(prID);
 	   
+	   System.out.println("Searcing for partner's procut");
 	   List<PartnerInventory> inventory = partner.getInventory();
 	   
-	   try {
+	  
 		   for (PartnerInventory i: inventory) {
-			   if (i.getProduct().getproductId() == productId) {
+			   if (i.getProduct().getproductId().equals(productId)) {
 				   inventory.remove(i);
 				   return "OK";
+			   }else {
+				   continue;
+				  
 			   }
 		   }
+	System.out.println("Couldn't find the product in database");
+	return null;
+   }
+   
+   public String findPartnerbyProduct(String productID) {
+	   for (Entry <String, Partner> p:partners.entrySet()) {
 		   
-		   }catch(Exception ex) {
-			   System.out.println("Couldn't find the product.");
-		   }
-	   return null;
-   	  }  
+		   Partner partner = p.getValue();
+		   for (PartnerInventory pi : partner.getInventory()) {
+			   if (pi.getProduct().getproductId().equals(productID)) {
+				   	return partner.getpartnerId();
+				   }		   
+			   }
+	   } 
+	   return "Could't find a partner with this product ID";
+	   //return null; 
+	}
 }
+    

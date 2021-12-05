@@ -10,20 +10,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class PartnerRequest {
-	private int partnerID;
+	
 	private String partnerName;
 	private String partnerInfo;
 	
 	public PartnerRequest(){
 		
-	}
-
-	public int getPartnerID() {
-		return partnerID;
-	}
-	
-	public void setPartnerID(int partnerID) {
-		this.partnerID = partnerID;
 	}
 	
 	public String getPartnerName() {

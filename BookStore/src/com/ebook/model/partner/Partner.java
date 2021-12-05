@@ -56,4 +56,5 @@ public class Partner {
 	public void addPartnerProduct(Product product, int quantity) {
 		inventory.add(new PartnerInventory(product,quantity));
 	}
+
 }

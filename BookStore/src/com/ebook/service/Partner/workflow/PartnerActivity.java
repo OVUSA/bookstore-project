@@ -3,11 +3,10 @@ package com.ebook.service.Partner.workflow;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-
 import com.ebook.model.link.Link;
 import com.ebook.model.partner.Partner;
 import com.ebook.model.partner.PartnerManager;
-
+import com.ebook.service.Partner.representation.PartnerInventoryRepresentation;
 import com.ebook.service.Partner.representation.PartnerRepresentation;
 
 
@@ -28,19 +27,32 @@ public class PartnerActivity {
 			partRep.setPartnerInfo(part.getPartnerInfo());
 			partRep.setPartnerID(part.getpartnerId());
 			
-			partnersRepresentations.add(partRep);		
-		}
+			// add representation to the set
+			partnersRepresentations.add(partRep);
+			
+			getPartnerLink(partRep);// view individual vendor
+		    deletePartnerLink(partRep);		
+		}		
 		return partnersRepresentations;
      }
 
 	
 	public PartnerRepresentation getPartnerById(String id) {
 		Partner partner = PartnerManager.findPartnerById(id);
+		partner.getInventory();
+		
+		PartnerInventoryRepresentation  partInvRep = new PartnerInventoryRepresentation ();
 		
 		PartnerRepresentation partRep = new PartnerRepresentation();
 		partRep.setPartnerName(partner.getPartnerName());
 		partRep.setPartnerInfo(partner.getPartnerInfo());
 		partRep.setPartnerID(partner.getpartnerId());
+		
+	
+		//links
+		//viewAllPartners(partRep);
+		//deletePartnerLink(partRep);
+		viewPartnerProducts(partInvRep);
 		
 		return partRep;
 	}
@@ -54,28 +66,41 @@ public class PartnerActivity {
 		partRep.setPartnerInfo(partner.getPartnerInfo());
 		partRep.setPartnerName(partner.getPartnerName());
 		
-		getPartnerLinks(partRep);
+		getPartnerLink(partRep);// view individual vendor
+		deletePartnerLink(partRep);			
 		return partRep;
 	}
 	
 	public String deletePartner(String id) {
+		PartnerRepresentation partRep = new PartnerRepresentation();	
 		partnerManager.removePartner(id);
-				
-		return "OK";
+		
+		viewAllPartners(partRep);				
+		return "OK";			
 	}
 	 
 	
-
-	
-	private void getPartnerLinks(PartnerRepresentation partnerRep) { // get PartnerID
+	// HATEOAS
+	private void getPartnerLink(PartnerRepresentation partnerRep) { // get PartnerID
 		// then look at the partner products
-		Link viewPartner = new Link("view_Partner","http://localhost:8081/partner/{partnerID}", "application/xml");	
+		Link viewPartner = new Link("view_a_partner","http://localhost:8080/partner/{partnerID}", "application/xml");	
 		partnerRep.setLinks(viewPartner);
 	}
 	
-	private void viewPartners(PartnerRepresentation partnerRep) { 
+	private void viewAllPartners(PartnerRepresentation partnerRep) { 
 		
-		Link viewPartner = new Link("view_Partners","http://localhost:8081/partners", "application/xml");	
+		Link viewPartner = new Link("view_All_Partners","http://localhost:8080/partnerservice/partners", "application/xml");	
 		partnerRep.setLinks(viewPartner);
 	}
+	
+	private void deletePartnerLink(PartnerRepresentation partnerRep) {
+		
+		Link deletePartner = new Link("http://localhost:8080/partnerservice/partner/{partnerID}","delete_the_partner","application/xml" );	
+		partnerRep.setLinks(deletePartner);
+	}
+	private void viewPartnerProducts(PartnerInventoryRepresentation partnerInvent) {
+		Link viewPartnerProducts = new Link("view_products","http://localhost:8080/partnerservice/{partnerID}/partner_products","application/xml");
+		partnerInvent.setLinks(viewPartnerProducts);
+	}
+
 }

@@ -1,22 +1,18 @@
 package com.ebook.model.partner;
 
-import com.ebook.dal.PartnerInventoryDAO;
 import com.ebook.model.item.Product;
 
 public class PartnerInventory {
+	private String id;
 	private Product product;
 	private int quantity;
-	private PartnerInventoryDAO inventoryDAO;
 	
-	PartnerInventory(Product product, int quantity){
+	
+	public PartnerInventory(Product product, int quantity){
 		this.product = product;
 		this.quantity = quantity;
 	}
-	
-	PartnerInventory(){
-		this.inventoryDAO = new PartnerInventoryDAO();
-		
-	}
+
 	public Product getProduct() {
 		return product;
 	}
@@ -33,12 +29,13 @@ public class PartnerInventory {
 		this.quantity = quantity;
 	}
 
-	public PartnerInventoryDAO getInventoryDAO() {
-		return inventoryDAO;
+	public String getId() {
+		return id;
 	}
 
-	public void setInventoryDAO(PartnerInventoryDAO inventoryDAO) {
-		this.inventoryDAO = inventoryDAO;
+	public void setId(String id) {
+		this.id = id;
 	}
+	
 
 }

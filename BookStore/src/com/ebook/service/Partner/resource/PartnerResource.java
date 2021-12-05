@@ -116,5 +116,9 @@ public class PartnerResource implements PartnerService{
 		}
 		return null;
 	}
-
+	
+	
+	
+	
 }
+

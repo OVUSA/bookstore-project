@@ -99,7 +99,6 @@ public class PartnerDAO {
 	   String prID = findPartnerbyProduct(productId);
 	   Partner partner = findPartnerById(prID);
 	   
-	   System.out.println("Searcing for partner's procut");
 	   List<PartnerInventory> inventory = partner.getInventory();
 	   
 	  

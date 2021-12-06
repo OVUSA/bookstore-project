@@ -1,10 +1,13 @@
 package com.ebook.service.Partner.representation;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.ebook.model.partner.PartnerInventory;
 import com.ebook.service.AbstractRepresentation.AbstractRepresentation;
 
 
@@ -17,6 +20,7 @@ public class PartnerRepresentation extends AbstractRepresentation  {
 	private String partnerID;
 	private String partnerName;
 	private String partnerInfo;
+	private List<PartnerInventory> inventory;
 	
 	public PartnerRepresentation(){
 		
@@ -43,6 +47,14 @@ public class PartnerRepresentation extends AbstractRepresentation  {
 
 	public void setPartnerInfo(String partnerInfo) {
 		this.partnerInfo = partnerInfo;
+	}
+
+	public List<PartnerInventory> getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(List<PartnerInventory> inventory) {
+		this.inventory = inventory;
 	}
 
 }

@@ -28,6 +28,7 @@ public class  PartnerInventoryRequest {
 		this.price = price;
 		this.quantity= quantity;			
 		}
+	
 	PartnerInventoryRequest(String title){
 		this.title = title;
 		

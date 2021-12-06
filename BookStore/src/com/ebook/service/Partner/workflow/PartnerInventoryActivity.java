@@ -39,7 +39,8 @@ public class PartnerInventoryActivity {
 			  PartnerInventoryRepresentation PartnerInventoryRepresentation = new PartnerInventoryRepresentation(productRep,qn);
 	          partnerInvRepresentation.add(PartnerInventoryRepresentation);
 	          
-	          deleteProduct(PartnerInventoryRepresentation);
+	          placeOrder(productRep);
+	         // deleteProduct(PartnerInventoryRepresentation,productRep.getproductId(), part.getpartnerId());
 	        }	
 		
 		
@@ -60,32 +61,38 @@ public class PartnerInventoryActivity {
 		pr.setTitle(prod.getTitle());
 
 		PartnerInventoryRepresentation prI = new PartnerInventoryRepresentation (pr,productInvRequest.getQuantity());
+		
+		viewPartnerProductLink(prI, partnerId);		
 		return prI ;
+			
 	}
 	
 	public String removePartnerProduct(String productId) {
 		partnerManager.deleteProduct(productId);
 		return "OK";
 	}
-
-	
 	
 	private void addPartnerProductLinks() { 
 			
-		Link addProduct = new Link("view_Partner","http://localhost:8081/partner_product", "application/xml");	
+		Link addProduct = new Link("view_Partner","http://localhost:8080/partnerservice/partner_product", "application/xml");	
 		PartnerInventoryRepresentation partnerInvRep = new PartnerInventoryRepresentation();
 		partnerInvRep.setLinks(addProduct);
 	}
 	
-	private void viewPartnerProductLinks() { 
-		
-		Link addProduct = new Link("view_Partner_Products","http://localhost:8081/partner_products", "application/xml");	
-		PartnerInventoryRepresentation partnerInvRep = new PartnerInventoryRepresentation();
-		partnerInvRep.setLinks(addProduct);
+	private void viewPartnerProductLink(PartnerInventoryRepresentation partnerInvent, String partnerID ) {
+		Link viewPartnerProducts = new Link("http://localhost:8080/partnerservice/"+partnerID+ "/partner_products","view_products","application/xml");
+		partnerInvent.setLinks(viewPartnerProducts);
 	}
 	
-	private void deleteProduct(PartnerInventoryRepresentation partnerInvent) {
-		Link deleteProduct = new Link ("delete_product","http://localhost:8081/partnerservice/{partnerId}/{productId}","application/xml");
+	private void deleteProduct(PartnerInventoryRepresentation partnerInvent, String productID, String partnerID) {
+		Link deleteProduct = new Link ("http://localhost:8080/partnerservice/"+partnerID+"/"+productID,"delete_product","application/xml");
 		partnerInvent.setLinks(deleteProduct);
+	}
+	
+	
+	private void placeOrder(ProductRepresentation product) { 
+		Link placeOrder = new Link("http://localhost:8080/orderservice/order","buy_product", "application/xml");	
+		product.setLinks(placeOrder);
+		
 	}
 }

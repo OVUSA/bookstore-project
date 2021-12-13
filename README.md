@@ -172,9 +172,13 @@ Delete a partner:
 ```
 
 Add partneer product:
+
 @POST
+
 ```/{partnerId}/partner_product```
+
 Request Sample:
+
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <partnerInventoryRequest>	
@@ -190,7 +194,7 @@ Delete Partner Product
 
 @DELETE
 ```
-partnerservice/PI147/PB2113
+partnerservice/{partnerId}/{productId}
 ```
 
 Get partner Products:

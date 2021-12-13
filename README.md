@@ -111,12 +111,11 @@ Get partner by ID:
 ```
 
 Get all partners:
-
 ```
 @GET
 /partners
 ```
-Respond:
+Respond Sample:
 
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -131,31 +130,13 @@ Respond:
     <partnerInfo>Welcome to Shiny Owl Books, a general bookshop with several room with 15,000 books in the shop. We sell a wide variety of Fiction, Factual and Childrens Books including many thousands of paperback novels, childrens books and popular non-fiction titles</partnerInfo>
 </PartnerRepresentation>
 ```
+
 Add a partner:
 
 ```
 @POST
 /partners
 ```
-
-```Respond``
-
-```
-<PartnerRepresentation>
-    <partnerID>PI289</partnerID>
-    <partnerName> Semicolon Bookstore </partnerName>
-    <partnerInfo>Based in Chicago, Black woman-owned bookstore and gallery space, Semicolon Bookstore is committed to nurturing the connection between literature, art, and the pursuit of knowledge; while also using the power of words to better our community. </partnerInfo>
-</PartnerRepresentation>
-```
-
-Delete a partner:
-
-```
-@DELETE
-/partner/{partnerID}
-```
-
-# Below are some sample requests and responses
 ```PartnerRequest``` sample :
 
 ```
@@ -168,10 +149,10 @@ Delete a partner:
 </PartnerRequest>
 ```
 
-```Partner```sample:
+```Partner Respond```sample:
 
 ```
- <Partner>
+ <PartnerRepresentation>
         <link>
             <rel>http://localhost:8080/partnerservice/partner/PI147</rel>
             <type>application/xml</type>
@@ -180,8 +161,69 @@ Delete a partner:
         <partnerID>PI147</partnerID>
         <partnerName>Amazon Books</partnerName>
         <partnerInfo>Amazon Books is a customer-focused store, designed to spur discovery; a place where customers can find great books and products of paperback novels, childrens books and popular non-fiction titles</partnerInfo>
-</Partner>
+</PartnerRepresentation>
 ```
+
+Delete a partner:
+
+```
+@DELETE
+/partner/{partnerID}
+```
+
+Add partneer product:
+@POST
+```/{partnerId}/partner_product```
+Request Sample:
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<partnerInventoryRequest>	
+	<title>Where the Wild Things Are</title>
+	<price> 10.00 </price>
+	<author>Maurice Sendak</author>
+	<description>Children's picture book </description>
+	<quantity>10</quantity>
+</partnerInventoryRequest>
+```
+
+Delete Partner Product
+
+@DELETE
+```
+partnerservice/PI147/PB2113
+```
+
+Get partner Products:
+@GET
+```
+partnerservice/{partnerId}/partner_products
+```
+Respond Sample :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<PartnerInventorys>
+    <PartnerInventory>
+        <product>
+            <link>
+                <rel>buy_product</rel>
+                <type>application/xml</type>
+                <url>http://localhost:8080/orderservice/order</url>
+            </link>
+            <productId>PI51</productId>
+            <title>A Game of Thrones</title>
+            <price>20.1</price>
+            <description>Fantasy novel</description>
+            <author>George R. R. Martin</author>
+        </product>
+        <quantity>10</quantity>
+    </PartnerInventory>
+</PartnerInventorys>
+```
+
+
+
+
+
 # Order
 The order endpoint has the following URIs and corresponding methods:
 
